@@ -1,7 +1,8 @@
 package com.ronaldosantos.workshopmongo.config;
 
-import java.time.Instant;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +28,9 @@ public class Instantiaton implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
 		userRepository.deleteAll();
 		postRepository.deleteAll();
 		
@@ -36,12 +40,12 @@ public class Instantiaton implements CommandLineRunner {
 		
 		userRepository.saveAll(Arrays.asList(maria,alex,bob));
 		
-		Post post1 = new Post(null,Instant.parse("2018-03-21T19:53:07Z"),"Partir Viagem","Vou viajar para São Paulo abraços!",new AuthorDTO(maria));
-		Post post2 = new Post(null,Instant.parse("2018-03-23T19:53:07Z"),"Bom dia","Acordei Feliz hoje!",new AuthorDTO(maria));
+		Post post1 = new Post(null,sdf.parse("2018/03/21"),"Partir Viagem","Vou viajar para São Paulo abraços!",new AuthorDTO(maria));
+		Post post2 = new Post(null,sdf.parse("2018/03/23"),"Bom dia","Acordei Feliz hoje!",new AuthorDTO(maria));
 		
-		CommentsDTO c1 = new CommentsDTO("Boa Viagem Mano",Instant.parse("2018-03-21T03:01:01Z"),new AuthorDTO(alex));
-		CommentsDTO c2 = new CommentsDTO("Aproveite", Instant.parse("2018-03-22T03:01:01Z"),new AuthorDTO(bob));
-		CommentsDTO c3 = new CommentsDTO("Tenha um ótimo dia",Instant.parse("2018-03-23T03:01:01Z"),new AuthorDTO(alex));
+		CommentsDTO c1 = new CommentsDTO("Boa Viagem Mano",sdf.parse("2018/03/21"),new AuthorDTO(alex));
+		CommentsDTO c2 = new CommentsDTO("Aproveite", sdf.parse("2018/03/22"),new AuthorDTO(bob));
+		CommentsDTO c3 = new CommentsDTO("Tenha um ótimo dia",sdf.parse("2018/03/23"),new AuthorDTO(alex));
 		
 		post1.getComments().addAll(Arrays.asList(c1,c2));
 		post2.getComments().addAll(Arrays.asList(c3));

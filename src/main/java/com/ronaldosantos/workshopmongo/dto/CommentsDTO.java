@@ -1,21 +1,21 @@
 package com.ronaldosantos.workshopmongo.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 
 public class CommentsDTO implements  Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String text;
-	private Instant data;
+	private Date data;
 	private AuthorDTO author;
 	
 	public CommentsDTO() {
 		
 	}
 
-	public CommentsDTO(String text, Instant data, AuthorDTO author) {
+	public CommentsDTO(String text, Date data, AuthorDTO author) {
 		super();
 		this.text = text;
 		this.data = data;
@@ -30,11 +30,11 @@ public class CommentsDTO implements  Serializable {
 		this.text = text;
 	}
 
-	public Instant getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
